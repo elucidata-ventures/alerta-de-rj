@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alerta de RJ — aviso no dia da publicação quando um cliente seu pede recuperação judicial</title>
+<meta name="description" content="Monitoramos os CNPJs da sua carteira nas publicações dos diários de justiça e avisamos no mesmo dia quando um cliente pede recuperação judicial, tem a RJ deferida ou vai à falência. R$249/mês até 200 CNPJs. 15 dias de teste, sem cartão.">
+<meta name="robots" content="index,follow">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Elucidata · Alerta de RJ">
+<meta property="og:url" content="https://elucidata-ventures.github.io/alerta-de-rj/">
+<meta property="og:title" content="Seu cliente pediu RJ hoje. Você quer saber hoje ou daqui a 30 dias?">
+<meta property="og:description" content="Alerta por e-mail no dia da publicação quando qualquer CNPJ da sua carteira aparece em pedido de recuperação judicial, RJ deferida ou falência. R$249/mês até 200 CNPJs.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Seu cliente pediu RJ hoje. Você quer saber hoje ou daqui a 30 dias?">
+<meta name="twitter:description" content="Alerta por e-mail no dia da publicação quando um cliente da sua carteira pede recuperação judicial ou vai à falência.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2313304d'/><path d='M16 7a5 5 0 0 0-5 5v4l-1.6 2.6a.7.7 0 0 0 .6 1.1h12a.7.7 0 0 0 .6-1.1L21 16v-4a5 5 0 0 0-5-5z' fill='%23f0b95a'/><path d='M13.6 21.4a2.6 2.6 0 0 0 4.8 0z' fill='%23f0b95a'/></svg>">
+<style>
+  :root{
+    --ink:#15202a;
+    --ink-soft:#4b5966;
+    --line:#d7dee5;
+    --bg:#ffffff;
+    --bg-soft:#f3f6f9;
+    --brand:#13304d;
+    --brand-dark:#0b2038;
+    --accent:#e7eef5;
+    --alert:#8c2f14;
+    --alert-bg:#fdefe9;
+    --alert-line:#dba184;
+    --ok:#0f6b46;
+    --ok-bg:#e9f6ef;
+    --focus:#0b6bd3;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{line-height:1.22;letter-spacing:-0.015em;margin:0 0 .5em}
+  h1{font-size:2.05rem;font-weight:800}
+  h2{font-size:1.46rem;font-weight:750;margin-top:0}
+  h3{font-size:1.05rem;font-weight:700}
+  p{margin:0 0 1em}
+  a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+  strong{font-weight:700}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+
+  header.top{border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex;align-items:center;gap:10px;padding:14px 20px}
+  .mark{width:26px;height:26px;border-radius:6px;background:var(--brand);flex:0 0 auto;position:relative}
+  .mark::after{content:"";position:absolute;left:9px;top:7px;width:8px;height:8px;border-radius:2px 2px 6px 6px;background:#f0b95a}
+  .brandname{font-weight:750;letter-spacing:-0.01em}
+
+  .hero{padding:44px 0 40px;border-bottom:1px solid var(--line)}
+  .eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--brand);background:var(--accent);border-radius:999px;padding:5px 12px;margin-bottom:18px}
+  .lede{font-size:1.13rem;color:var(--ink-soft);max-width:64ch}
+  .pricetag{display:inline-block;font-weight:750;border:1.5px solid var(--brand);color:var(--brand-dark);border-radius:8px;padding:6px 12px;font-size:1.01rem;margin:4px 0 22px}
+  .btn{
+    display:inline-block;background:var(--brand);color:#fff;text-decoration:none;
+    font-family:inherit;font-weight:750;font-size:1.04rem;padding:15px 24px;border-radius:10px;
+    border:0;cursor:pointer;line-height:1.3;text-align:center;
+  }
+  .btn:hover{background:var(--brand-dark)}
+  .btn[disabled]{opacity:.55;cursor:progress}
+  .btn.block{display:block;width:100%}
+  .under-btn{font-size:.95rem;color:var(--ink-soft);margin-top:12px;max-width:62ch}
+  .alt-cta{margin:14px 0 0;font-size:1rem}
+
+  section{padding:40px 0;border-bottom:1px solid var(--line)}
+  .steps{list-style:none;margin:0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s;position:relative;padding-left:52px;margin-bottom:22px}
+  .steps li:last-child{margin-bottom:0}
+  .steps li::before{
+    content:counter(s);position:absolute;left:0;top:-1px;width:34px;height:34px;border-radius:50%;
+    background:var(--brand);color:#fff;font-weight:750;font-size:1rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .steps li p{margin:.15em 0 0;color:var(--ink-soft)}
+
+  .fields{list-style:none;margin:0 0 20px;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .fields li{padding:12px 16px;border-bottom:1px solid var(--line)}
+  .fields li:last-child{border-bottom:0}
+  .fields li:nth-child(odd){background:var(--bg-soft)}
+  .fields b{display:block}
+  .fields span{color:var(--ink-soft);font-size:.97rem}
+
+  .note{background:var(--bg-soft);border-left:4px solid var(--brand);border-radius:0 10px 10px 0;padding:14px 18px;font-size:.98rem;color:var(--ink-soft)}
+  .note b{color:var(--ink)}
+  .note p:last-child{margin-bottom:0}
+  .note.warn{background:var(--alert-bg);border-left-color:var(--alert)}
+
+  .clock{background:var(--alert-bg);border:1.5px solid var(--alert-line);border-radius:12px;padding:18px 20px;margin:0 0 22px}
+  .clock h3{margin:0 0 6px;color:var(--alert)}
+  .clock p:last-child{margin-bottom:0}
+  .clock .lawref{font-size:.9rem;color:var(--ink-soft)}
+
+  .plan{border:2px solid var(--brand);border-radius:14px;padding:24px}
+  .plan .amount{font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;line-height:1}
+  .plan .per{font-size:1rem;font-weight:600;color:var(--ink-soft)}
+  .plan ul{list-style:none;margin:18px 0 0;padding:0}
+  .plan li{position:relative;padding-left:28px;margin-bottom:10px}
+  .plan li::before{content:"";position:absolute;left:4px;top:8px;width:8px;height:8px;border-left:2.5px solid var(--brand);border-bottom:2.5px solid var(--brand);transform:rotate(-45deg)}
+  .plan .fineprint{margin:18px 0 0;font-size:.93rem;color:var(--ink-soft)}
+
+  .sample{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:0 0 8px}
+  .sample .subject{background:var(--bg-soft);border-bottom:1px solid var(--line);padding:12px 16px;font-size:.95rem;color:var(--ink-soft)}
+  .sample .subject b{color:var(--ink);display:block;font-size:1rem}
+  .sample .body{padding:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;line-height:1.65;white-space:pre-wrap;margin:0;overflow-wrap:anywhere}
+  .caption{font-size:.9rem;color:var(--ink-soft)}
+
+  #numeros{background:var(--bg-soft);border:1px dashed #b3c0cc;border-radius:12px;padding:18px 20px}
+  #numeros h3{margin-top:0}
+  #numeros p:last-child{margin-bottom:0}
+
+  /* ---------- formulário ---------- */
+  #trial{background:var(--bg-soft)}
+  form{margin:0}
+  .field{margin:0 0 18px}
+  label{display:block;font-weight:650;margin-bottom:6px}
+  label .hint{font-weight:400;color:var(--ink-soft);font-size:.95rem}
+  input[type=text],input[type=email],select,textarea{
+    width:100%;font-family:inherit;font-size:1rem;color:var(--ink);background:#fff;
+    border:1.5px solid #b6c2cd;border-radius:9px;padding:12px 13px;
+  }
+  textarea{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;min-height:190px;resize:vertical;line-height:1.55}
+  textarea::placeholder,input::placeholder{color:#7c8a97}
+  select{appearance:none;background-image:linear-gradient(45deg,transparent 49%,var(--brand) 50%),linear-gradient(135deg,var(--brand) 50%,transparent 51%);background-position:calc(100% - 20px) 21px,calc(100% - 14px) 21px;background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
+  .contador{margin-top:9px;font-size:.96rem;font-weight:650;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+  .contador .n{color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok);border-radius:999px;padding:2px 11px}
+  .contador .n.zero{color:var(--ink-soft);background:#fff;border-color:#b6c2cd}
+  .contador .extra{font-weight:400;color:var(--ink-soft);font-size:.93rem}
+  .check{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1.5px solid var(--brand);border-radius:10px;padding:14px 16px;margin:0 0 20px}
+  .check input{margin:3px 0 0;width:19px;height:19px;flex:0 0 auto;accent-color:var(--brand)}
+  .check label{margin:0;font-weight:650}
+  .check .sub{display:block;font-weight:400;color:var(--ink-soft);font-size:.94rem;margin-top:3px}
+  #fstatus{margin-top:16px;padding:14px 16px;border-radius:10px;font-size:.97rem;display:none}
+  #fstatus.on{display:block}
+  #fstatus.info{background:#fff8e6;border:1.5px solid #e0be5e;color:#5a4508}
+  #fstatus.err{background:#fdecec;border:1.5px solid #e08b8b;color:#7a1f1f}
+  #fstatus.ok{background:var(--ok-bg);border:1.5px solid var(--ok);color:#0b4b31}
+  #fstatus p{margin:0 0 .6em}
+  #fstatus p:last-child{margin:0}
+  .privacy-inline{font-size:.94rem;color:var(--ink-soft);margin:0 0 20px}
+
+  .faq details{border:1px solid var(--line);border-radius:10px;margin-bottom:10px;background:#fff}
+  .faq summary{cursor:pointer;font-weight:700;padding:14px 16px;list-style:none}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";float:right;font-weight:750;color:var(--brand)}
+  .faq details[open] summary::after{content:"–"}
+  .faq .a{padding:0 16px 14px;color:var(--ink-soft)}
+  .faq .a p:last-child{margin-bottom:0}
+
+  footer{padding:30px 0 44px;color:var(--ink-soft);font-size:.92rem}
+  footer p{margin-bottom:.6em}
+
+  @media (max-width:600px){
+    body{font-size:16px}
+    h1{font-size:1.62rem}
+    h2{font-size:1.28rem}
+    .hero{padding:32px 0 30px}
+    section{padding:32px 0}
+    .plan{padding:20px}
+    .btn{width:100%}
+    .steps li{padding-left:46px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="mark" aria-hidden="true"></span>
+    <span class="brandname">Elucidata · Alerta de RJ</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Para quem vende a prazo para outras empresas</span>
+    <h1>Seu cliente pediu RJ hoje. Você quer saber hoje ou daqui a 30 dias?</h1>
+    <p class="lede">Nós lemos as publicações dos diários de justiça todo dia e cruzamos com a carteira de CNPJs que você nos manda. Quando um dos seus clientes aparece em pedido de recuperação judicial, RJ deferida ou falência, você recebe um e-mail <strong>no mesmo dia da publicação</strong> — e não pela boca do vendedor, semanas depois, quando o pedido já virou notícia.</p>
+    <p class="pricetag">R$ 249/mês · até 200 CNPJs monitorados</p>
+    <p><button type="button" class="btn" data-cta>Monitorar minha carteira grátis por 15 dias</button></p>
+    <p class="under-btn">Teste de 15 dias sem custo e sem cartão. Você cola a lista de CNPJs que quer vigiar — não pedimos integração, acesso ao seu ERP, balanço nem dados de faturamento.</p>
+    <p class="alt-cta"><a href="#como">Antes disso, veja como funciona →</a></p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>O atraso custa em três lugares ao mesmo tempo</h2>
+    <p>Você fatura a prazo. O cliente atrasa um título, o vendedor diz que é "fluxo de caixa", você libera o próximo pedido. Trinta dias depois alguém do jurídico descobre que a empresa <strong>já havia protocolado a recuperação judicial</strong> antes daquele pedido sair da sua expedição.</p>
+
+    <div class="clock">
+      <h3>Um dos custos tem prazo em dias</h3>
+      <p>Publicado o edital com a relação de credores apresentada pelo devedor, os credores têm <strong>15 dias</strong> para apresentar habilitação ou divergência de crédito ao administrador judicial. Quem só fica sabendo da RJ depois disso entra atrasado na disputa sobre o próprio valor que tem a receber.</p>
+      <p class="lawref">Art. 7º, § 1º, da Lei 11.101/2005. Não somos advogados e isto não é orientação jurídica — a contagem e a estratégia do seu crédito são do seu jurídico. O nosso papel é você não perder a data.</p>
+    </div>
+
+    <ul class="fields">
+      <li><b>O crédito que você já tem vira crédito concursal</b><span>a recuperação judicial alcança os créditos existentes na data do pedido, ainda que não vencidos (art. 49). Crédito sem garantia entra na classe geral e é pago nos termos do plano aprovado pela assembleia — normalmente com deságio e em parcelas que se estendem por anos. Não vamos inventar um percentual médio de recuperação: varia caso a caso, e quem promete número aqui está chutando.</span></li>
+      <li><b>Cada pedido novo faturado sem saber aumenta a exposição</b><span>é a parte que ainda está sob o seu controle e é a que o atraso destrói. Saber no mesmo dia não desfaz o que já foi vendido — mas para a sangria, segura a próxima liberação de limite e coloca a operação em regime de cautela antes do prejuízo dobrar.</span></li>
+      <li><b>A execução em curso para de andar</b><span>deferido o processamento da recuperação, as execuções contra o devedor ficam suspensas (art. 6º). Se você estava contando com uma cobrança judicial para resolver o título atrasado, a régua mudou — e é melhor descobrir isso no dia da decisão do que na próxima audiência.</span></li>
+    </ul>
+
+    <p class="note"><b>Nada disso é informação secreta.</b> Decisões e editais de recuperação judicial e falência são atos processuais publicados em diário oficial de justiça, abertos a qualquer pessoa. O problema nunca foi o sigilo: é que ninguém tem alguém lendo o diário todo dia procurando os CNPJs da sua carteira. É exatamente esse trabalho que a gente faz.</p>
+  </div>
+</section>
+
+<section id="como">
+  <div class="wrap">
+    <h2>Como funciona</h2>
+    <ol class="steps">
+      <li>
+        <h3>Você manda a carteira</h3>
+        <p>Cola a lista de CNPJs dos clientes a quem vende a prazo — até 200 no plano. Só o número. Se quiser mandar a razão social junto, ela ajuda o cruzamento, mas é opcional. Nada de planilha de títulos, limite de crédito ou acesso a sistema seu.</p>
+      </li>
+      <li>
+        <h3>Cruzamos com as publicações dos diários de justiça, todo dia</h3>
+        <p>Lemos as publicações dos diários oficiais de justiça procurando os atos que interessam — pedido de recuperação judicial, deferimento do processamento, recuperação concedida, falência requerida e falência decretada — e comparamos com a sua lista. Você não pede nada, não abre painel nenhum, não consulta CNPJ por CNPJ.</p>
+      </li>
+      <li>
+        <h3>Você recebe o alerta no mesmo dia</h3>
+        <p>Deu match, sai o e-mail no mesmo dia da publicação, com o ato, o processo e o texto original para você conferir na fonte. Dia sem publicação na sua carteira é dia sem e-mail: não mandamos relatório diário de "nada aconteceu" para treinar o seu olho a ignorar a nossa mensagem.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>O que chega no alerta</h2>
+    <ul class="fields">
+      <li><b>Qual cliente seu, sem ambiguidade</b><span>CNPJ e razão social, do jeito que estão na sua carteira — para você achar o cadastro no seu sistema em segundos, sem adivinhar de qual "Comercial Silva" se trata.</span></li>
+      <li><b>O que exatamente foi publicado</b><span>pedido de recuperação judicial, deferimento do processamento, recuperação concedida, falência requerida, falência decretada ou convolação da RJ em falência. Cada um desses atos pede uma reação diferente da sua, então o alerta não mistura os dois.</span></li>
+      <li><b>Onde correr atrás</b><span>tribunal, vara, número do processo e a data da publicação, com a referência do diário em que ela saiu.</span></li>
+      <li><b>O texto da publicação, no original</b><span>sem paráfrase nossa. Você lê o que o juízo escreveu e repassa ao seu jurídico sem intermediação.</span></li>
+      <li><b>O aviso de prazo, quando for o caso</b><span>se a publicação for o edital com a relação de credores, sinalizamos que o prazo de habilitação e divergência do art. 7º, § 1º está em curso. O cálculo e a peça são do seu jurídico — nós avisamos que o relógio começou.</span></li>
+    </ul>
+
+    <div class="sample">
+      <div class="subject"><b>[Alerta de RJ] Recuperação judicial deferida — cliente da sua carteira</b>exemplo do formato do e-mail, com dados fictícios de demonstração</div>
+      <p class="body">CNPJ .......: 00.000.000/0001-00
+RAZÃO SOCIAL: (nome da empresa, como consta na sua carteira)
+ATO ........: deferimento do processamento da recuperação judicial
+PUBLICADO EM: (data da publicação no diário)
+JUÍZO ......: (vara / comarca / tribunal)
+PROCESSO ...: (número CNJ)
+
+TRECHO PUBLICADO
+"(texto da decisão, reproduzido no original)"
+
+O QUE ISSO SIGNIFICA PARA VOCÊ
+- execuções contra a devedora ficam suspensas (art. 6º)
+- créditos existentes na data do pedido entram no plano (art. 49)
+- fique atento ao edital de credores: abre o prazo do art. 7º, § 1º</p>
+    </div>
+    <p class="caption">O bloco acima é um modelo de formato, não um alerta real: os campos entre parênteses são preenchidos com o que a publicação trouxer.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>O que já monitoramos</h2>
+    <!-- CEO: substituir pelos números reais de dados/rjs_recentes.csv -->
+    <div id="numeros">
+      <h3>Este espaço é reservado para números medidos por nós</h3>
+      <p>Vai entrar aqui a nossa própria contagem das recuperações judiciais e falências publicadas nos últimos dias, com os tribunais de onde vieram — o mesmo dado que alimenta o alerta, para você julgar a cobertura antes de confiar nela.</p>
+      <p>Enquanto essa contagem não estiver medida e conferida, esta página <strong>não exibe número nenhum</strong>. Preferimos deixar o espaço em branco a preencher com estatística sem lastro: você trabalha com risco de crédito, reconheceria o blefe na hora.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Preço</h2>
+    <div class="plan">
+      <div><span class="amount">R$ 249</span> <span class="per">por mês</span></div>
+      <p style="margin:.7em 0 0;color:var(--ink-soft)">Até <strong>200 CNPJs monitorados</strong>. É a conta inteira — sem taxa de setup, sem implantação, sem cobrança por alerta enviado.</p>
+      <ul>
+        <li><strong>15 dias de teste sem custo e sem cartão</strong> — você manda a carteira e o monitoramento começa</li>
+        <li>Todos os atos incluídos: pedido, deferimento, concessão, falência requerida e falência decretada</li>
+        <li>Entra e sai CNPJ da lista quando quiser, dentro do limite do plano</li>
+        <li>Alerta por e-mail para quantos endereços você indicar — crédito, cobrança e o jurídico na mesma cópia</li>
+        <li>Sem fidelidade e sem multa: você avisa e o monitoramento para no fim do ciclo já pago</li>
+      </ul>
+      <p class="fineprint">Carteira maior que 200 CNPJs: fale com a gente antes de assinar, para não vender o que não cabe no plano. Nesta fase de validação, os testes são conduzidos com um número limitado de empresas por vez.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>A sua carteira é sua</h2>
+    <p>Sabemos o tamanho do que estamos pedindo. A lista de quem compra a prazo de você é informação comercial sensível, e você não deve entregá-la a um desconhecido sem saber o que acontece com ela. Então, sem juridiquês:</p>
+    <ul class="fields">
+      <li><b>CNPJ é dado de pessoa jurídica, público por definição</b><span>o número do CNPJ e a situação cadastral estão no cadastro público da Receita Federal, e as decisões e editais de RJ e falência são atos processuais publicados em diário oficial. Não pedimos, não recebemos e não tratamos dado pessoal dos seus clientes: não queremos nome de comprador, telefone, CPF de sócio nem histórico de compras.</span></li>
+      <li><b>A carteira que você envia serve para uma coisa só: gerar o seu alerta</b><span>ela é usada para cruzar com as publicações do dia. Não alimenta bureau, não vira base de score, não é insumo de nenhum outro produto nosso.</span></li>
+      <li><b>Não vendemos, não cedemos e não compartilhamos a sua lista</b><span>e o compromisso que mais importa neste mercado: <strong>não usamos a sua carteira para vender nada aos seus clientes, nem para oferecer nada aos seus concorrentes</strong>. Você não está entregando o seu mailing comercial em troca de um alerta.</span></li>
+      <li><b>Você pede a exclusão e ela sai</b><span>um pedido em texto simples basta — sem formulário, sem carência, sem ligação de retenção. A lista é apagada dos nossos registros, e isso vale durante o teste, não só depois de assinar.</span></li>
+      <li><b>Não avisamos o seu cliente que ele está sendo monitorado</b><span>não existe contato nosso com as empresas da sua lista. O monitoramento é leitura de publicação oficial: nada é perguntado a ninguém.</span></li>
+    </ul>
+    <p class="note warn"><b>O alerta é um aviso, não uma certidão.</b> Ele te diz onde olhar, em que processo e em que dia — para você agir no tempo certo. Para efeito legal valem a certidão, o processo e a peça do seu advogado. Desconfie de quem disser o contrário.</p>
+  </div>
+</section>
+
+<section id="trial">
+  <div class="wrap">
+    <h2>Monitore sua carteira por 15 dias, sem custo</h2>
+    <p>Cole os CNPJs dos clientes a quem você vende a prazo. A partir do dia seguinte, eles entram no cruzamento diário com as publicações — e você só ouve falar de nós se algum deles aparecer. Sem cartão, sem contrato e sem compromisso de continuar.</p>
+
+    <form id="form" novalidate autocomplete="on">
+      <div class="field">
+        <label for="f_nome">Nome <span class="hint">— obrigatório</span></label>
+        <input type="text" id="f_nome" name="nome" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label for="f_email">E-mail corporativo <span class="hint">— obrigatório, é onde o alerta chega</span></label>
+        <input type="email" id="f_email" name="email" autocomplete="email" inputmode="email" required>
+      </div>
+
+      <div class="field">
+        <label for="f_empresa">Empresa <span class="hint">— obrigatório</span></label>
+        <input type="text" id="f_empresa" name="empresa" autocomplete="organization" required>
+      </div>
+
+      <div class="field">
+        <label for="f_cargo">Cargo</label>
+        <select id="f_cargo" name="cargo">
+          <option value="">Selecione…</option>
+          <option value="Crédito">Crédito</option>
+          <option value="Cobrança">Cobrança</option>
+          <option value="Financeiro">Financeiro</option>
+          <option value="Comercial">Comercial</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="f_carteira">Cole aqui os CNPJs que você quer monitorar — um por linha <span class="hint">— obrigatório</span></label>
+        <textarea id="f_carteira" name="carteira" spellcheck="false" autocomplete="off" required
+          placeholder="Um CNPJ por linha, com ou sem pontuação — nós normalizamos.&#10;Pode colar direto de uma coluna do Excel.&#10;&#10;Ex.:&#10;33.000.167/0001-01&#10;60746948000112"></textarea>
+        <div class="contador" id="contador" role="status" aria-live="polite">
+          <span class="n zero" id="contador_n">0 CNPJs válidos reconhecidos</span>
+          <span class="extra" id="contador_extra"></span>
+        </div>
+        <p class="privacy-inline" style="margin-top:10px">Conferimos o dígito verificador de cada CNPJ aqui no seu navegador, enquanto você digita — nada é enviado até você clicar no botão.</p>
+      </div>
+
+      <div class="check">
+        <input type="checkbox" id="f_assinar" name="assinar">
+        <label for="f_assinar">Quero o monitoramento contínuo por R$249/mês depois do teste
+          <span class="sub">Marcar aqui não cobra nada e não gera cadastro de pagamento. É só para sabermos que você pretende seguir depois dos 15 dias.</span>
+        </label>
+      </div>
+
+      <p><button type="submit" class="btn block" id="f_btn">Monitorar minha carteira grátis por 15 dias</button></p>
+      <div id="fstatus" role="status" aria-live="polite" tabindex="-1"></div>
+      <noscript><p class="note warn" style="margin-top:16px">Este formulário precisa de JavaScript para conferir os CNPJs e enviar o cadastro. Sem ele, o restante da página funciona normalmente.</p></noscript>
+    </form>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Perguntas diretas</h2>
+    <div class="faq">
+      <details>
+        <summary>De onde vem a informação?</summary>
+        <div class="a"><p>Das publicações dos diários oficiais de justiça — os mesmos atos processuais que qualquer pessoa pode ler, sem contrato e sem acesso privilegiado. Não temos linha direta com tribunal, com juízo nem com administrador judicial, e não vendemos acesso a nada: o que vendemos é o trabalho de ler as publicações todo dia e cruzar com a sua carteira.</p></div>
+      </details>
+      <details>
+        <summary>Vocês garantem que nenhuma RJ da minha carteira passa batido?</summary>
+        <div class="a"><p>Não, e essa é a resposta honesta. O alerta depende de a decisão ou o edital estarem publicados e de a publicação permitir identificar a empresa — quando o texto sai sem CNPJ, o cruzamento fica por razão social, que é mais frágil. Atraso do próprio diário e variação de formato entre tribunais também existem.</p><p>Por isso a nossa postura é medir e mostrar a cobertura em vez de prometer 100%: é o que vai ocupar o bloco "O que já monitoramos" desta página. Trate o serviço como uma camada de vigilância que você não tem hoje, não como substituto de certidão nem de consulta oficial.</p></div>
+      </details>
+      <details>
+        <summary>Quantas empresas já usam? Onde estão os depoimentos?</summary>
+        <div class="a"><p>Somos novos e estamos começando. Não temos base de clientes para exibir, nem logo, nem selo, nem depoimento — e preferimos dizer isso a inventar prova social. Você avalia risco de crédito para viver: reconheceria a invenção na hora e ela custaria mais caro do que a falta.</p><p>O que oferecemos em lugar disso é verificável: 15 dias monitorando a sua carteira de verdade, sem cartão, e o compromisso de publicar aqui os números da nossa cobertura conforme forem medidos.</p></div>
+      </details>
+      <details>
+        <summary>Preciso integrar com o meu ERP ou instalar alguma coisa?</summary>
+        <div class="a"><p>Não. Sem integração, sem plugin, sem certificado digital, sem acesso ao seu sistema. Você manda uma lista de CNPJs em texto ou planilha e recebe e-mail. É todo o acoplamento que existe — e é de propósito: quem decide isso é você, não a sua TI.</p></div>
+      </details>
+      <details>
+        <summary>Monitoram só recuperação judicial?</summary>
+        <div class="a"><p>Não. O alerta cobre pedido de recuperação judicial, deferimento do processamento, recuperação concedida, falência requerida, falência decretada e a convolação da recuperação em falência. São situações com consequências diferentes para o seu crédito, então o e-mail diz qual delas aconteceu em vez de mandar um aviso genérico de "problema".</p></div>
+      </details>
+      <details>
+        <summary>Com que frequência recebo e-mail?</summary>
+        <div class="a"><p>Só quando algo da sua carteira aparece nas publicações. Se em um mês nenhum dos seus clientes for a juízo, você não recebe nada nesse mês — e esse é o resultado correto. Não existe relatório diário de "nenhuma ocorrência": isso só ensinaria você a arquivar a nossa mensagem sem abrir, e o dia em que ela importasse ela seria ignorada.</p></div>
+      </details>
+      <details>
+        <summary>Minha carteira tem mais de 200 CNPJs. E aí?</summary>
+        <div class="a"><p>Escreva no formulário a lista que quiser e nos diga o tamanho real: nesta fase preferimos combinar antes a acomodar carteira grande em plano que não a cobre. Você também pode começar por um recorte — os clientes de maior exposição, uma regional, um segmento. A lista é sua e você monta como quiser.</p></div>
+      </details>
+      <details>
+        <summary>O que vocês fazem com a minha lista se eu não assinar?</summary>
+        <div class="a"><p>Ela deixa de ser cruzada quando o teste termina, e é apagada se você pedir — basta responder ao e-mail. Ela não é vendida, não é compartilhada e não é usada para abordar os seus clientes, nem durante o teste nem depois. Está escrito na seção "A sua carteira é sua", acima, e vale como compromisso.</p></div>
+      </details>
+      <details>
+        <summary>Posso cancelar quando quiser?</summary>
+        <div class="a"><p>Sim. Sem fidelidade, sem multa, sem prazo mínimo. Você avisa, o monitoramento para no fim do ciclo já pago e a sua carteira é excluída se você pedir.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Elucidata · Alerta de RJ</strong> — monitoramento diário de publicações de recuperação judicial e falência contra a carteira de clientes de quem vende a prazo B2B.</p>
+    <p>Trabalhamos com publicações de diários oficiais de justiça e com o cadastro público de CNPJ. Não somos ligados ao Poder Judiciário, a nenhum tribunal, a bureau de crédito nem a qualquer órgão público, e não prestamos serviço de advocacia: o alerta é informativo e não substitui certidão, consulta processual ou orientação jurídica.</p>
+    <p>Esta página está em validação com as primeiras empresas: pedir o teste é começar uma conversa, não fazer uma compra.</p>
+    <p>Elucidata Ventures · <span id="ano">2026</span></p>
+  </div>
+</footer>
+
+<!--
+  =====================================================================
+  CEO — LIGAR A CAPTURA É EDITAR UMA LINHA SÓ: a constante FORM_ENDPOINT,
+  primeira linha de código do <script> logo abaixo. Cole ali a URL
+  /formResponse do Google Form (ex.: https://docs.google.com/forms/d/e/XXXX/formResponse).
+  Enquanto ela estiver vazia (""), o formulário NÃO finge cadastro: mostra
+  aviso honesto, preserva tudo que a pessoa digitou e não registra nada.
+
+  Depois disso, preencha o FIELD_MAP (linha seguinte) com os IDs entry.* do
+  Form. Mapeamento campo desta página -> campo do Google Form, na ordem em
+  que o Form deve ser criado:
+
+    nome       Campo 1  "Nome"                                     resposta curta   OBRIGATÓRIO
+    email      Campo 2  "E-mail corporativo"                       resposta curta   OBRIGATÓRIO
+    empresa    Campo 3  "Empresa"                                  resposta curta   OBRIGATÓRIO
+    cargo      Campo 4  "Cargo"                                    múltipla escolha: Crédito / Cobrança / Financeiro / Comercial / Outro
+    carteira   Campo 5  "Cole aqui os CNPJs que você quer
+                         monitorar - um por linha"                 PARÁGRAFO        OBRIGATÓRIO
+                        <<< ESTE É O CAMPO DA MÉTRICA DO GATE 1: trial COM carteira enviada.
+                        Recebe os CNPJs já normalizados (14 dígitos), sem duplicatas, um por linha.
+    assinar    Campo 6  "Quero o monitoramento contínuo por
+                         R$249/mês depois do teste"                caixa de seleção (1 opção: "Sim")
+
+    qtd_cnpjs  OPCIONAL - só se você criar um 7º campo (resposta curta): quantos CNPJs
+               válidos vieram na carteira. Dá o sinal de QUALIDADE da carteira sem
+               precisar contar linha na planilha de respostas.
+    origem     OPCIONAL - só se você criar um 8º campo (resposta curta): identifica a
+               landing de origem ("landing-alerta-de-rj").
+    Campos sem entry.* preenchido são simplesmente omitidos do POST — não quebram nada.
+
+  Como achar os IDs entry.*: abra o formulário publicado, "Ver código-fonte da
+  página" e procure por "entry." (ou inspecione cada input: o atributo name é
+  entry.NNNNNNNNN). Em caixa de seleção o valor enviado precisa ser IGUAL ao
+  texto da opção no Form — se você criar a opção como "Sim", ajuste VALOR_SIM
+  logo abaixo do FIELD_MAP.
+  =====================================================================
+-->
+<script>
+const FORM_ENDPOINT = ""; // <<< A ÚNICA LINHA A EDITAR: URL /formResponse do Google Form (pendência do endpoint de captura)
+const FIELD_MAP = {       // campo desta página -> ID entry.* do Google Form (os números abaixo são PLACEHOLDERS)
+  nome:      "entry.0000000001",
+  email:     "entry.0000000002",
+  empresa:   "entry.0000000003",
+  cargo:     "entry.0000000004",
+  carteira:  "entry.0000000005",  // METRICA DO GATE 1
+  assinar:   "entry.0000000006",
+  qtd_cnpjs: "",                  // opcional (7º campo)
+  origem:    ""                   // opcional (8º campo)
+};
+const VALOR_SIM = "Sim";          // texto exato da opção da caixa de seleção no Google Form
+const LIMITE_PLANO = 200;         // CNPJs incluídos no plano de R$249/mês
+
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $("form");
+  var btn = $("f_btn");
+  var box = $("fstatus");
+  var ta = $("f_carteira");
+  var cn = $("contador_n");
+  var cx = $("contador_extra");
+
+  var anoEl = $("ano");
+  if (anoEl) anoEl.textContent = new Date().getFullYear();
+
+  function say(kind, html) {
+    box.className = "on " + kind;
+    box.innerHTML = html;
+  }
+  function limpa() { box.className = ""; box.innerHTML = ""; }
+  function foca(el) {
+    if (!el) return;
+    el.focus();
+    if (el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  // ---------- CTAs do topo levam ao formulário ----------
+  Array.prototype.forEach.call(document.querySelectorAll("[data-cta]"), function (b) {
+    b.addEventListener("click", function () {
+      var alvo = $("trial");
+      if (alvo && alvo.scrollIntoView) alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(function () { $("f_nome").focus({ preventScroll: true }); }, 350);
+    });
+  });
+
+  // ---------- validação de CNPJ: dígitos verificadores ----------
+  function cnpjValido(c) {
+    if (!/^\d{14}$/.test(c)) return false;
+    if (/^(\d)\1{13}$/.test(c)) return false;          // 000...0, 111...1 etc. passam na conta e não existem
+    function dv(base) {
+      var pesos = base.length === 12
+        ? [5,4,3,2,9,8,7,6,5,4,3,2]
+        : [6,5,4,3,2,9,8,7,6,5,4,3,2];
+      var s = 0;
+      for (var i = 0; i < base.length; i++) s += parseInt(base.charAt(i), 10) * pesos[i];
+      var r = s % 11;
+      return r < 2 ? 0 : 11 - r;
+    }
+    return dv(c.slice(0, 12)) === parseInt(c.charAt(12), 10)
+        && dv(c.slice(0, 13)) === parseInt(c.charAt(13), 10);
+  }
+
+  // Aceita quebra de linha, ponto-e-vírgula, vírgula, tabulação (colagem de Excel) e espaço.
+  function parseCarteira(txt) {
+    var tokens = String(txt || "").split(/[\s,;]+/).filter(function (t) { return t !== ""; });
+    var validos = [], invalidos = [], vistos = {}, dups = 0;
+    tokens.forEach(function (t) {
+      var d = t.replace(/\D/g, "");
+      if (d.length === 14 && cnpjValido(d)) {
+        if (vistos[d]) { dups++; return; }
+        vistos[d] = 1;
+        validos.push(d);
+      } else {
+        invalidos.push(t);
+      }
+    });
+    return { validos: validos, invalidos: invalidos, dups: dups };
+  }
+
+  // ---------- contador ao vivo: prova de competência técnica na hora ----------
+  function atualizaContador() {
+    var p = parseCarteira(ta.value);
+    var n = p.validos.length;
+    cn.textContent = n === 1 ? "1 CNPJ válido reconhecido" : n + " CNPJs válidos reconhecidos";
+    cn.className = "n" + (n === 0 ? " zero" : "");
+
+    var extras = [];
+    if (p.invalidos.length) {
+      extras.push(p.invalidos.length + (p.invalidos.length === 1 ? " item ignorado" : " itens ignorados") +
+                  " (não passa no dígito verificador): " +
+                  p.invalidos.slice(0, 3).join(", ") + (p.invalidos.length > 3 ? "…" : ""));
+    }
+    if (p.dups) extras.push(p.dups + (p.dups === 1 ? " repetido removido" : " repetidos removidos"));
+    if (n > LIMITE_PLANO) extras.push("acima dos " + LIMITE_PLANO + " CNPJs do plano — mande assim mesmo e a gente combina o formato");
+    cx.textContent = extras.join(" · ");
+    return p;
+  }
+  ta.addEventListener("input", atualizaContador);
+  ta.addEventListener("change", atualizaContador);
+  atualizaContador();
+
+  // ---------- envio ----------
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    limpa();
+
+    var nome = $("f_nome").value.trim();
+    var email = $("f_email").value.trim();
+    var empresa = $("f_empresa").value.trim();
+    var cargo = $("f_cargo").value;
+    var p = atualizaContador();
+
+    if (!nome) { say("err", "<p>Falta o seu nome.</p>"); return foca($("f_nome")); }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      say("err", "<p>Confira o e-mail: é para lá que o alerta vai. Se puder, use o e-mail da empresa em vez do pessoal.</p>");
+      return foca($("f_email"));
+    }
+    if (!empresa) { say("err", "<p>Falta o nome da sua empresa.</p>"); return foca($("f_empresa")); }
+    if (!p.validos.length) {
+      say("err", "<p><strong>Falta a carteira.</strong> O teste é o monitoramento dos seus CNPJs — sem a lista não há o que monitorar. " +
+                 "Cole ao menos um CNPJ (14 dígitos, com ou sem pontuação); se quiser começar pequeno, mande só os clientes de maior exposição.</p>");
+      return foca(ta);
+    }
+
+    var payload = {
+      nome:      nome,
+      email:     email,
+      empresa:   empresa,
+      cargo:     cargo || "(não informado)",
+      carteira:  p.validos.join("\n"),          // normalizada, sem duplicatas: 14 dígitos por linha
+      assinar:   $("f_assinar").checked ? VALOR_SIM : "",
+      qtd_cnpjs: String(p.validos.length),
+      origem:    "landing-alerta-de-rj"
+    };
+
+    // Sem endpoint configurado não fingimos cadastro e não perdemos o que a pessoa digitou.
+    if (!FORM_ENDPOINT) {
+      say("info",
+        "<p><strong>O canal de cadastro está sendo liberado — volte em algumas horas.</strong> " +
+        "Estamos terminando de configurar o recebimento e preferimos não fingir um cadastro que não existe: " +
+        "<strong>nada foi enviado e nada foi registrado agora.</strong></p>" +
+        "<p>O que você digitou continua aqui na tela, inclusive os " + p.validos.length +
+        (p.validos.length === 1 ? " CNPJ que já conferimos" : " CNPJs que já conferimos") +
+        ". Se puder, deixe esta aba aberta ou salve a página: quando o canal abrir, este mesmo botão envia a carteira de uma vez.</p>");
+      foca(box);
+      return;
+    }
+
+    var body = new URLSearchParams();
+    Object.keys(payload).forEach(function (k) {
+      if (FIELD_MAP[k] && payload[k] !== "") body.append(FIELD_MAP[k], payload[k]);
+    });
+
+    var rotulo = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "Enviando…";
+
+    // Google Forms não devolve cabeçalho de CORS: com no-cors o POST é aceito e a resposta é opaca.
+    var googleForm = /docs\.google\.com/.test(FORM_ENDPOINT);
+
+    fetch(FORM_ENDPOINT, {
+      method: "POST",
+      mode: googleForm ? "no-cors" : "cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString()
+    })
+      .then(function (r) {
+        if (!googleForm && !r.ok) throw new Error("HTTP " + r.status);
+        say("ok",
+          "<p><strong>Carteira recebida: " + p.validos.length +
+          (p.validos.length === 1 ? " CNPJ entra no monitoramento." : " CNPJs entram no monitoramento.") + "</strong></p>" +
+          "<p>Confirmamos por e-mail em <strong>" + email.replace(/[<>&]/g, "") + "</strong> e o cruzamento diário começa em seguida. " +
+          "A partir daí você só ouve falar de nós se um desses CNPJs aparecer numa publicação — dia sem publicação é dia sem e-mail.</p>");
+        form.reset();
+        atualizaContador();
+        foca(box);
+      })
+      .catch(function () {
+        say("err",
+          "<p><strong>Não conseguimos enviar agora.</strong> Foi falha nossa de rede, não erro seu: nada foi registrado.</p>" +
+          "<p>Seus dados seguem preenchidos aqui — tente novamente em alguns minutos.</p>");
+        foca(box);
+      })
+      .then(function () {
+        btn.disabled = false;
+        btn.textContent = rotulo;
+      });
+  });
+})();
+</script>
+</body>
+</html>
