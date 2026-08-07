@@ -463,18 +463,21 @@ O QUE ISSO SIGNIFICA PARA VOCÊ
   =====================================================================
 -->
 <script>
-const FORM_ENDPOINT = ""; // <<< A ÚNICA LINHA A EDITAR: URL /formResponse do Google Form (pendência do endpoint de captura)
-const FIELD_MAP = {       // campo desta página -> ID entry.* do Google Form (os números abaixo são PLACEHOLDERS)
-  nome:      "entry.0000000001",
-  email:     "entry.0000000002",
-  empresa:   "entry.0000000003",
-  cargo:     "entry.0000000004",
-  carteira:  "entry.0000000005",  // METRICA DO GATE 1
-  assinar:   "entry.0000000006",
-  qtd_cnpjs: "",                  // opcional (7º campo)
-  origem:    ""                   // opcional (8º campo)
+// LIGADO em 2026-08-06: endpoint próprio do fundo (asset A-06, Cloudflare Worker + D1).
+// Não é Google Form — não exige login do respondente, devolve CORS "*" e o CEO lê com
+// `python3 ../../ops/captura.py --novos`. Testado com POST real (lead 11, apagado depois).
+const FORM_ENDPOINT = "https://captura.elucidata.vc/v1/g001-20";
+const FIELD_MAP = {       // campo desta página -> nome do campo no endpoint de captura
+  nome:      "nome",
+  email:     "email",
+  empresa:   "empresa",
+  cargo:     "cargo",
+  carteira:  "cnpjs",             // METRICA DO GATE 1
+  assinar:   "assinar",
+  qtd_cnpjs: "qtd_cnpjs",
+  origem:    "origem"
 };
-const VALOR_SIM = "Sim";          // texto exato da opção da caixa de seleção no Google Form
+const VALOR_SIM = "Sim";          // valor gravado quando a pessoa marca a caixa de assinatura
 const LIMITE_PLANO = 200;         // CNPJs incluídos no plano de R$249/mês
 
 (function () {
@@ -624,6 +627,7 @@ const LIMITE_PLANO = 200;         // CNPJs incluídos no plano de R$249/mês
     btn.textContent = "Enviando…";
 
     // Google Forms não devolve cabeçalho de CORS: com no-cors o POST é aceito e a resposta é opaca.
+    // O endpoint do fundo devolve CORS "*", então usamos modo cors e conferimos o status de verdade.
     var googleForm = /docs\.google\.com/.test(FORM_ENDPOINT);
 
     fetch(FORM_ENDPOINT, {
