@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recuperações judiciais e falências publicadas — por estado</title>
+<meta name="description" content="194 eventos de recuperação judicial e falência publicados no DJEN entre 22/06/2026 e 05/08/2026 de 2026, abertos por estado, com número de processo. Declaramos os 8 estados que a nossa captura não alcança.">
+<meta name="robots" content="index,follow">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://elucidata-ventures.github.io/alerta-de-rj/uf/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Elucidata · Alerta de RJ">
+<meta property="og:url" content="https://elucidata-ventures.github.io/alerta-de-rj/uf/">
+<meta property="og:title" content="Recuperações judiciais e falências publicadas — por estado">
+<meta property="og:description" content="194 eventos de recuperação judicial e falência publicados no DJEN entre 22/06/2026 e 05/08/2026 de 2026, abertos por estado, com número de processo. Declaramos os 8 estados que a nossa captura não alcança.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2313304d'/><path d='M16 7a5 5 0 0 0-5 5v4l-1.6 2.6a.7.7 0 0 0 .6 1.1h12a.7.7 0 0 0 .6-1.1L21 16v-4a5 5 0 0 0-5-5z' fill='%23f0b95a'/><path d='M13.6 21.4a2.6 2.6 0 0 0 4.8 0z' fill='%23f0b95a'/></svg>">
+<style>
+  :root{
+    --ink:#15202a;
+    --ink-soft:#4b5966;
+    --line:#d7dee5;
+    --bg:#ffffff;
+    --bg-soft:#f3f6f9;
+    --brand:#13304d;
+    --brand-dark:#0b2038;
+    --accent:#e7eef5;
+    --alert:#8c2f14;
+    --alert-bg:#fdefe9;
+    --alert-line:#dba184;
+    --ok:#0f6b46;
+    --ok-bg:#e9f6ef;
+    --focus:#0b6bd3;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{line-height:1.22;letter-spacing:-0.015em;margin:0 0 .5em}
+  h1{font-size:2.05rem;font-weight:800}
+  h2{font-size:1.46rem;font-weight:750;margin-top:0}
+  h3{font-size:1.05rem;font-weight:700}
+  p{margin:0 0 1em}
+  a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+  strong{font-weight:700}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+
+  header.top{border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex;align-items:center;gap:10px;padding:14px 20px}
+  .mark{width:26px;height:26px;border-radius:6px;background:var(--brand);flex:0 0 auto;position:relative}
+  .mark::after{content:"";position:absolute;left:9px;top:7px;width:8px;height:8px;border-radius:2px 2px 6px 6px;background:#f0b95a}
+  .brandname{font-weight:750;letter-spacing:-0.01em}
+
+  .hero{padding:44px 0 40px;border-bottom:1px solid var(--line)}
+  .eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--brand);background:var(--accent);border-radius:999px;padding:5px 12px;margin-bottom:18px}
+  .lede{font-size:1.13rem;color:var(--ink-soft);max-width:64ch}
+  .pricetag{display:inline-block;font-weight:750;border:1.5px solid var(--brand);color:var(--brand-dark);border-radius:8px;padding:6px 12px;font-size:1.01rem;margin:4px 0 22px}
+  .btn{
+    display:inline-block;background:var(--brand);color:#fff;text-decoration:none;
+    font-family:inherit;font-weight:750;font-size:1.04rem;padding:15px 24px;border-radius:10px;
+    border:0;cursor:pointer;line-height:1.3;text-align:center;
+  }
+  .btn:hover{background:var(--brand-dark)}
+  .btn[disabled]{opacity:.55;cursor:progress}
+  .btn.block{display:block;width:100%}
+  .under-btn{font-size:.95rem;color:var(--ink-soft);margin-top:12px;max-width:62ch}
+  .alt-cta{margin:14px 0 0;font-size:1rem}
+
+  section{padding:40px 0;border-bottom:1px solid var(--line)}
+  .steps{list-style:none;margin:0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s;position:relative;padding-left:52px;margin-bottom:22px}
+  .steps li:last-child{margin-bottom:0}
+  .steps li::before{
+    content:counter(s);position:absolute;left:0;top:-1px;width:34px;height:34px;border-radius:50%;
+    background:var(--brand);color:#fff;font-weight:750;font-size:1rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .steps li p{margin:.15em 0 0;color:var(--ink-soft)}
+
+  .fields{list-style:none;margin:0 0 20px;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .fields li{padding:12px 16px;border-bottom:1px solid var(--line)}
+  .fields li:last-child{border-bottom:0}
+  .fields li:nth-child(odd){background:var(--bg-soft)}
+  .fields b{display:block}
+  .fields span{color:var(--ink-soft);font-size:.97rem}
+
+  .note{background:var(--bg-soft);border-left:4px solid var(--brand);border-radius:0 10px 10px 0;padding:14px 18px;font-size:.98rem;color:var(--ink-soft)}
+  .note b{color:var(--ink)}
+  .note p:last-child{margin-bottom:0}
+  .note.warn{background:var(--alert-bg);border-left-color:var(--alert)}
+
+  .clock{background:var(--alert-bg);border:1.5px solid var(--alert-line);border-radius:12px;padding:18px 20px;margin:0 0 22px}
+  .clock h3{margin:0 0 6px;color:var(--alert)}
+  .clock p:last-child{margin-bottom:0}
+  .clock .lawref{font-size:.9rem;color:var(--ink-soft)}
+
+  .plan{border:2px solid var(--brand);border-radius:14px;padding:24px}
+  .plan .amount{font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;line-height:1}
+  .plan .per{font-size:1rem;font-weight:600;color:var(--ink-soft)}
+  .plan ul{list-style:none;margin:18px 0 0;padding:0}
+  .plan li{position:relative;padding-left:28px;margin-bottom:10px}
+  .plan li::before{content:"";position:absolute;left:4px;top:8px;width:8px;height:8px;border-left:2.5px solid var(--brand);border-bottom:2.5px solid var(--brand);transform:rotate(-45deg)}
+  .plan .fineprint{margin:18px 0 0;font-size:.93rem;color:var(--ink-soft)}
+
+  .sample{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:0 0 8px}
+  .sample .subject{background:var(--bg-soft);border-bottom:1px solid var(--line);padding:12px 16px;font-size:.95rem;color:var(--ink-soft)}
+  .sample .subject b{color:var(--ink);display:block;font-size:1rem}
+  .sample .body{padding:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;line-height:1.65;white-space:pre-wrap;margin:0;overflow-wrap:anywhere}
+  .caption{font-size:.9rem;color:var(--ink-soft)}
+
+  #numeros{background:var(--bg-soft);border:1px dashed #b3c0cc;border-radius:12px;padding:18px 20px}
+  #numeros h3{margin-top:0}
+  #numeros p:last-child{margin-bottom:0}
+
+  /* ---------- formulário ---------- */
+  #trial{background:var(--bg-soft)}
+  form{margin:0}
+  .field{margin:0 0 18px}
+  label{display:block;font-weight:650;margin-bottom:6px}
+  label .hint{font-weight:400;color:var(--ink-soft);font-size:.95rem}
+  input[type=text],input[type=email],select,textarea{
+    width:100%;font-family:inherit;font-size:1rem;color:var(--ink);background:#fff;
+    border:1.5px solid #b6c2cd;border-radius:9px;padding:12px 13px;
+  }
+  textarea{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;min-height:190px;resize:vertical;line-height:1.55}
+  textarea::placeholder,input::placeholder{color:#7c8a97}
+  select{appearance:none;background-image:linear-gradient(45deg,transparent 49%,var(--brand) 50%),linear-gradient(135deg,var(--brand) 50%,transparent 51%);background-position:calc(100% - 20px) 21px,calc(100% - 14px) 21px;background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
+  .contador{margin-top:9px;font-size:.96rem;font-weight:650;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+  .contador .n{color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok);border-radius:999px;padding:2px 11px}
+  .contador .n.zero{color:var(--ink-soft);background:#fff;border-color:#b6c2cd}
+  .contador .extra{font-weight:400;color:var(--ink-soft);font-size:.93rem}
+  .check{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1.5px solid var(--brand);border-radius:10px;padding:14px 16px;margin:0 0 20px}
+  .check input{margin:3px 0 0;width:19px;height:19px;flex:0 0 auto;accent-color:var(--brand)}
+  .check label{margin:0;font-weight:650}
+  .check .sub{display:block;font-weight:400;color:var(--ink-soft);font-size:.94rem;margin-top:3px}
+  #fstatus{margin-top:16px;padding:14px 16px;border-radius:10px;font-size:.97rem;display:none}
+  #fstatus.on{display:block}
+  #fstatus.info{background:#fff8e6;border:1.5px solid #e0be5e;color:#5a4508}
+  #fstatus.err{background:#fdecec;border:1.5px solid #e08b8b;color:#7a1f1f}
+  #fstatus.ok{background:var(--ok-bg);border:1.5px solid var(--ok);color:#0b4b31}
+  #fstatus p{margin:0 0 .6em}
+  #fstatus p:last-child{margin:0}
+  .privacy-inline{font-size:.94rem;color:var(--ink-soft);margin:0 0 20px}
+
+  .faq details{border:1px solid var(--line);border-radius:10px;margin-bottom:10px;background:#fff}
+  .faq summary{cursor:pointer;font-weight:700;padding:14px 16px;list-style:none}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";float:right;font-weight:750;color:var(--brand)}
+  .faq details[open] summary::after{content:"–"}
+  .faq .a{padding:0 16px 14px;color:var(--ink-soft)}
+  .faq .a p:last-child{margin-bottom:0}
+
+  footer{padding:30px 0 44px;color:var(--ink-soft);font-size:.92rem}
+  footer p{margin-bottom:.6em}
+
+  @media (max-width:600px){
+    body{font-size:16px}
+    h1{font-size:1.62rem}
+    h2{font-size:1.28rem}
+    .hero{padding:32px 0 30px}
+    section{padding:32px 0}
+    .plan{padding:20px}
+    .btn{width:100%}
+    .steps li{padding-left:46px}
+  }
+
+  /* ---------- específico dos boletins por UF (mesmas variáveis da landing) ---------- */
+  table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.95rem}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--bg-soft);font-weight:700;font-size:.9rem;letter-spacing:.01em}
+  td.num{white-space:nowrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;color:var(--ink-soft)}
+  td.dt{white-space:nowrap}
+  td .semnome{color:var(--ink-soft);font-style:italic}
+  .tag{display:inline-block;font-size:.82rem;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap;
+       background:var(--accent);color:var(--brand-dark)}
+  .tag.fal{background:var(--alert-bg);color:var(--alert);border:1px solid var(--alert-line)}
+  .ufgrid{list-style:none;margin:0 0 6px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+  .ufgrid li{border:1px solid var(--line);border-radius:10px}
+  .ufgrid a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+            padding:12px 14px;text-decoration:none;color:var(--ink);font-weight:650}
+  .ufgrid a:hover{background:var(--bg-soft)}
+  .ufgrid .n{font-weight:800;color:var(--brand)}
+  .ufgrid.vazias li{background:var(--bg-soft)}
+  .ufgrid.vazias span{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;color:var(--ink-soft);font-weight:600}
+  .voltar{font-size:.95rem;margin:0 0 4px}
+  .kpi{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px;padding:0;list-style:none}
+  .kpi li{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:var(--bg-soft)}
+  .kpi b{display:block;font-size:1.5rem;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+  .kpi span{font-size:.88rem;color:var(--ink-soft)}
+  .tabela-wrap{overflow-x:auto}
+  @media (max-width:600px){ th,td{padding:8px 9px} .kpi b{font-size:1.28rem} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="mark" aria-hidden="true"></span>
+    <span class="brandname">Elucidata · Alerta de RJ</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="voltar"><a href="../">← Alerta de RJ</a></p>
+    <span class="eyebrow">Boletim aberto · atualizado a cada rodada de captura</span>
+    <h1>Recuperações judiciais e falências publicadas — por estado</h1>
+    <p class="lede">Entre <strong>22/06/2026</strong> e <strong>05/08/2026 de 2026</strong> a nossa captura encontrou <strong>194 eventos</strong> de recuperação judicial e falência no Diário de Justiça Eletrônico Nacional, em <strong>182 processos</strong> e <strong>172 devedores nomeados</strong>, distribuídos por <strong>19 estados</strong>. Abaixo, a lista nominal de cada estado — com o número do processo, para conferência.</p>
+    <p class="under-btn">Publicamos isto aberto, de graça e sem cadastro, inclusive a parte que nos desfavorece: os 8 estados em que <em>não</em> encontramos nada estão declarados no fim desta página.</p>
+    <p><a class="btn" href="https://captura.elucidata.vc/f/g001-20">Monitore a SUA carteira</a></p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Estados com eventos encontrados</h2>
+    <ul class="ufgrid">
+      <li><a href="sp.html"><span>SP · São Paulo</span><span class="n">39</span></a></li><li><a href="pr.html"><span>PR · Paraná</span><span class="n">35</span></a></li><li><a href="mt.html"><span>MT · Mato Grosso</span><span class="n">29</span></a></li><li><a href="mg.html"><span>MG · Minas Gerais</span><span class="n">23</span></a></li><li><a href="rj.html"><span>RJ · Rio de Janeiro</span><span class="n">21</span></a></li><li><a href="pe.html"><span>PE · Pernambuco</span><span class="n">7</span></a></li><li><a href="ce.html"><span>CE · Ceará</span><span class="n">6</span></a></li><li><a href="ro.html"><span>RO · Rondônia</span><span class="n">5</span></a></li><li><a href="ba.html"><span>BA · Bahia</span><span class="n">4</span></a></li><li><a href="ma.html"><span>MA · Maranhão</span><span class="n">4</span></a></li><li><a href="ms.html"><span>MS · Mato Grosso do Sul</span><span class="n">4</span></a></li><li><a href="df.html"><span>DF · Distrito Federal</span><span class="n">3</span></a></li><li><a href="es.html"><span>ES · Espírito Santo</span><span class="n">3</span></a></li><li><a href="pi.html"><span>PI · Piauí</span><span class="n">3</span></a></li><li><a href="rs.html"><span>RS · Rio Grande do Sul</span><span class="n">3</span></a></li><li><a href="pb.html"><span>PB · Paraíba</span><span class="n">2</span></a></li><li><a href="al.html"><span>AL · Alagoas</span><span class="n">1</span></a></li><li><a href="pa.html"><span>PA · Pará</span><span class="n">1</span></a></li><li><a href="rn.html"><span>RN · Rio Grande do Norte</span><span class="n">1</span></a></li>
+    </ul>
+    <p class="caption">O número ao lado é a quantidade de eventos publicados na janela, não a quantidade de empresas: um mesmo processo pode gerar a decisão e o edital dela.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Estados que a nossa captura ainda não alcança</h2>
+    <div class="note warn">
+      <p><b>Estes 8 estados saíram com ZERO eventos na nossa captura — e isso é lacuna nossa, não ausência de falência lá.</b> Empresas quebram nesses estados como em qualquer outro; o que falta é a nossa fonte alcançar a publicação. Por isso não existe página para eles: não vamos sugerir uma cobertura que não temos.</p>
+    </div>
+    <ul class="ufgrid vazias">
+      <li><span><span>AC · Acre</span><span>ainda não coberto por nós</span></span></li><li><span><span>AM · Amazonas</span><span>ainda não coberto por nós</span></span></li><li><span><span>AP · Amapá</span><span>ainda não coberto por nós</span></span></li><li><span><span>GO · Goiás</span><span>ainda não coberto por nós</span></span></li><li><span><span>RR · Roraima</span><span>ainda não coberto por nós</span></span></li><li><span><span>SC · Santa Catarina</span><span>ainda não coberto por nós</span></span></li><li><span><span>SE · Sergipe</span><span>ainda não coberto por nós</span></span></li><li><span><span>TO · Tocantins</span><span>ainda não coberto por nós</span></span></li>
+    </ul>
+    <p class="caption">Se você vende a prazo dentro de um desses estados, diga isso na hora de pedir o teste: você vai ver exatamente o que encontramos e o que não encontramos da sua carteira, antes de pagar qualquer coisa.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>O que esta lista não é</h2>
+    <div class="note warn">
+      <p><b>Não existe denominador — não sabemos o nosso recall.</b> Ninguém publica quantas recuperações judiciais e falências realmente aconteceram no Brasil neste período. Sabemos apenas quantas <b>a nossa busca encontrou</b>. Esta página é uma amostra do que capturamos, não um censo. Se um caso não está aqui, isso não prova que ele não existiu.</p>
+      <ul>
+        <li><b>Janela fechada:</b> publicações disponibilizadas no Diário de Justiça Eletrônico Nacional entre <b>22/06/2026</b> e <b>05/08/2026</b>. Nada fora disso está contado.</li>
+        <li><b>8 estados saíram com zero eventos na nossa captura (AC, AM, AP, GO, RR, SC, SE, TO). Isso é lacuna nossa, não ausência de falência lá.</b> Ou o tribunal usa outra redação, ou publica fora do DJEN, ou o volume não apareceu na nossa busca. Não criamos página para esses estados justamente para não sugerir cobertura que não temos.</li>
+        <li><b>A busca é por frases exatas</b> ("decreto a falência", "deferido o processamento da recuperação judicial" e outras cinco). Decisões escritas de outro jeito ("declaro a falência", "defiro o processamento", "julgo procedente o pedido de quebra", recuperação extrajudicial) ficam de fora por construção — é um buraco de recall que nós <b>não medimos</b>.</li>
+        <li><b>A data é a da publicação, não a do ato.</b> Editais dão publicidade a decisões bem anteriores.</li>
+        <li><b>Um mesmo processo pode aparecer duas vezes</b> (a decisão e o edital dela). Para contar empresas, use o número de devedores distintos, nunca o de eventos.</li>
+        <li><b>A taxa de erro do nosso classificador não foi validada à mão</b> contra os autos. Onde a razão social não saiu com confiança, deixamos o campo vazio e escrito "razão social não extraída com confiança" — preferimos vazio a chutado.</li>
+        <li><b>Este índice cobre só o que está no nosso arquivo desta janela.</b> Não é série histórica: uma janela de 45 dias não permite afirmar tendência de aumento ou de queda, e não fazemos essa afirmação em lugar nenhum.</li>
+      </ul>
+      <p>Conferência: cada linha traz o número do processo, que abre no PJe / consulta pública do tribunal. Achou um erro nosso? Responda para <a href="mailto:g001-20@elucidata.vc">g001-20@elucidata.vc</a> que corrigimos e dizemos o que estava errado.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Monitore a SUA carteira</h2>
+    <p>Ler a lista do seu estado responde metade da pergunta. A outra metade — <strong>algum destes é meu cliente, e quem da minha carteira vai aparecer no mês que vem?</strong> — é o que a gente faz todo dia.</p>
+    <p>Mande a sua lista de CNPJs e passamos a cruzar diariamente com as publicações. Quando um deles aparece em pedido de recuperação judicial, RJ deferida ou falência, você recebe um e-mail no mesmo dia da publicação.</p>
+    <p><a class="btn" href="https://captura.elucidata.vc/f/g001-20">Monitore a SUA carteira</a></p>
+    <p class="under-btn">Teste de 15 dias, sem custo e sem cartão. Depois, R$ 249/mês até 200 CNPJs.</p>
+    <p class="alt-cta"><a href="../">← Voltar para a página do Alerta de RJ</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Elucidata · Alerta de RJ</strong> — monitoramento diário de publicações de recuperação judicial e falência contra a carteira de clientes de quem vende a prazo B2B.</p>
+    <p>Dados extraídos de publicações do Diário de Justiça Eletrônico Nacional (DJEN/CNJ), que são públicas por natureza. Não somos ligados ao Poder Judiciário, a nenhum tribunal, a bureau de crédito nem a qualquer órgão público, e não prestamos serviço de advocacia: esta lista é informativa e não substitui certidão, consulta processual ou orientação jurídica.</p>
+    <p>Elucidata Ventures · 2026</p>
+  </div>
+</footer>
+</body>
+</html>
