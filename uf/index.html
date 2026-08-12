@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Recuperações judiciais e falências publicadas — por estado</title>
-<meta name="description" content="304 eventos de recuperação judicial e falência publicados no DJEN entre 22/06/2026 e 07/08/2026 de 2026, abertos por estado, com número de processo. Declaramos os 3 estados que a nossa captura não alcança.">
+<title>Recuperações judiciais e falências verificadas — por estado</title>
+<meta name="description" content="95 eventos de recuperação judicial e falência verificados contra o texto do tribunal, de 304 candidatos capturados no DJEN entre 22/06/2026 e 07/08/2026 de 2026, abertos por estado, com número de processo. Declaramos os 5 estados que a nossa captura não alcança.">
 <meta name="robots" content="index,follow">
 <meta name="color-scheme" content="light">
 <link rel="canonical" href="https://elucidata-ventures.github.io/alerta-de-rj/uf/">
@@ -12,8 +12,8 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Elucidata · Alerta de RJ">
 <meta property="og:url" content="https://elucidata-ventures.github.io/alerta-de-rj/uf/">
-<meta property="og:title" content="Recuperações judiciais e falências publicadas — por estado">
-<meta property="og:description" content="304 eventos de recuperação judicial e falência publicados no DJEN entre 22/06/2026 e 07/08/2026 de 2026, abertos por estado, com número de processo. Declaramos os 3 estados que a nossa captura não alcança.">
+<meta property="og:title" content="Recuperações judiciais e falências verificadas — por estado">
+<meta property="og:description" content="95 eventos de recuperação judicial e falência verificados contra o texto do tribunal, de 304 candidatos capturados no DJEN entre 22/06/2026 e 07/08/2026 de 2026, abertos por estado, com número de processo. Declaramos os 5 estados que a nossa captura não alcança.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2313304d'/><path d='M16 7a5 5 0 0 0-5 5v4l-1.6 2.6a.7.7 0 0 0 .6 1.1h12a.7.7 0 0 0 .6-1.1L21 16v-4a5 5 0 0 0-5-5z' fill='%23f0b95a'/><path d='M13.6 21.4a2.6 2.6 0 0 0 4.8 0z' fill='%23f0b95a'/></svg>">
 <style>
   :root{
@@ -119,6 +119,10 @@
   #numeros{background:var(--bg-soft);border:1px dashed #b3c0cc;border-radius:12px;padding:18px 20px}
   #numeros h3{margin-top:0}
   #numeros p:last-child{margin-bottom:0}
+  #numeros table{width:100%;border-collapse:collapse;margin:0 0 1em;font-size:.95rem}
+  #numeros th,#numeros td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  #numeros th{font-weight:700;font-size:.88rem;color:var(--ink-soft)}
+  #numeros th:not(:first-child),#numeros td:not(:first-child){text-align:right;white-space:nowrap}
 
   /* ---------- formulário ---------- */
   #trial{background:var(--bg-soft)}
@@ -212,20 +216,20 @@
   <div class="wrap">
     <p class="voltar"><a href="../">← Alerta de RJ</a></p>
     <span class="eyebrow">Boletim aberto · atualizado a cada rodada de captura</span>
-    <h1>Recuperações judiciais e falências publicadas — por estado</h1>
-    <p class="lede">Entre <strong>22/06/2026</strong> e <strong>07/08/2026</strong> a nossa captura encontrou <strong>304 eventos</strong> de recuperação judicial e falência no Diário de Justiça Eletrônico Nacional, em <strong>285 processos</strong> e <strong>263 devedores nomeados</strong>, distribuídos por <strong>24 estados</strong>. Abaixo, a lista nominal de cada estado — com o número do processo, para conferência.</p>
-    <p class="under-btn">Publicamos isto aberto, de graça e sem cadastro, inclusive a parte que nos desfavorece: os 3 estados em que <em>não</em> encontramos nada estão declarados no fim desta página.</p>
+    <h1>Recuperações judiciais e falências verificadas — por estado</h1>
+    <p class="lede">Entre <strong>22/06/2026</strong> e <strong>07/08/2026</strong> a nossa captura encontrou <strong>304 publicações candidatas</strong> de recuperação judicial e falência no Diário de Justiça Eletrônico Nacional. Relemos cada uma contra o <strong>texto integral</strong> da publicação do tribunal e <strong>95 passaram</strong> (31,2%), em <strong>91 processos distintos</strong> e <strong>22 estados</strong>. Abaixo, a lista de cada estado — com o número do processo, para conferência.</p>
+    <p class="under-btn"><strong>95 é o piso do que conseguimos provar, não o teto do que aconteceu.</strong> O filtro descarta tudo que não consegue confirmar, então ele derruba caso real junto — e nós não sabemos quantos. Publicamos isto aberto, de graça e sem cadastro, inclusive a parte que nos desfavorece: os 5 estados em que <em>não</em> verificamos nada estão declarados no fim desta página.</p>
     <p><a class="btn" href="https://captura.elucidata.vc/f/g001-20">Monitore a SUA carteira</a></p>
   </div>
 </div>
 
 <section>
   <div class="wrap">
-    <h2>Estados com eventos encontrados</h2>
+    <h2>Estados com eventos verificados</h2>
     <ul class="ufgrid">
-      <li><a href="sc.html"><span>SC · Santa Catarina</span><span class="n">51</span></a></li><li><a href="go.html"><span>GO · Goiás</span><span class="n">40</span></a></li><li><a href="sp.html"><span>SP · São Paulo</span><span class="n">39</span></a></li><li><a href="pr.html"><span>PR · Paraná</span><span class="n">35</span></a></li><li><a href="mt.html"><span>MT · Mato Grosso</span><span class="n">29</span></a></li><li><a href="mg.html"><span>MG · Minas Gerais</span><span class="n">23</span></a></li><li><a href="rj.html"><span>RJ · Rio de Janeiro</span><span class="n">21</span></a></li><li><a href="to.html"><span>TO · Tocantins</span><span class="n">14</span></a></li><li><a href="pe.html"><span>PE · Pernambuco</span><span class="n">7</span></a></li><li><a href="ce.html"><span>CE · Ceará</span><span class="n">6</span></a></li><li><a href="ro.html"><span>RO · Rondônia</span><span class="n">5</span></a></li><li><a href="ba.html"><span>BA · Bahia</span><span class="n">4</span></a></li><li><a href="ma.html"><span>MA · Maranhão</span><span class="n">4</span></a></li><li><a href="ms.html"><span>MS · Mato Grosso do Sul</span><span class="n">4</span></a></li><li><a href="se.html"><span>SE · Sergipe</span><span class="n">4</span></a></li><li><a href="df.html"><span>DF · Distrito Federal</span><span class="n">3</span></a></li><li><a href="es.html"><span>ES · Espírito Santo</span><span class="n">3</span></a></li><li><a href="pi.html"><span>PI · Piauí</span><span class="n">3</span></a></li><li><a href="rs.html"><span>RS · Rio Grande do Sul</span><span class="n">3</span></a></li><li><a href="pb.html"><span>PB · Paraíba</span><span class="n">2</span></a></li><li><a href="al.html"><span>AL · Alagoas</span><span class="n">1</span></a></li><li><a href="am.html"><span>AM · Amazonas</span><span class="n">1</span></a></li><li><a href="pa.html"><span>PA · Pará</span><span class="n">1</span></a></li><li><a href="rn.html"><span>RN · Rio Grande do Norte</span><span class="n">1</span></a></li>
+      <li><a href="pr.html"><span>PR · Paraná</span><span class="n">17</span></a></li><li><a href="sc.html"><span>SC · Santa Catarina</span><span class="n">17</span></a></li><li><a href="mg.html"><span>MG · Minas Gerais</span><span class="n">10</span></a></li><li><a href="rj.html"><span>RJ · Rio de Janeiro</span><span class="n">9</span></a></li><li><a href="go.html"><span>GO · Goiás</span><span class="n">5</span></a></li><li><a href="mt.html"><span>MT · Mato Grosso</span><span class="n">5</span></a></li><li><a href="sp.html"><span>SP · São Paulo</span><span class="n">5</span></a></li><li><a href="to.html"><span>TO · Tocantins</span><span class="n">4</span></a></li><li><a href="df.html"><span>DF · Distrito Federal</span><span class="n">3</span></a></li><li><a href="pe.html"><span>PE · Pernambuco</span><span class="n">3</span></a></li><li><a href="rs.html"><span>RS · Rio Grande do Sul</span><span class="n">3</span></a></li><li><a href="ce.html"><span>CE · Ceará</span><span class="n">2</span></a></li><li><a href="es.html"><span>ES · Espírito Santo</span><span class="n">2</span></a></li><li><a href="pi.html"><span>PI · Piauí</span><span class="n">2</span></a></li><li><a href="al.html"><span>AL · Alagoas</span><span class="n">1</span></a></li><li><a href="ba.html"><span>BA · Bahia</span><span class="n">1</span></a></li><li><a href="ma.html"><span>MA · Maranhão</span><span class="n">1</span></a></li><li><a href="ms.html"><span>MS · Mato Grosso do Sul</span><span class="n">1</span></a></li><li><a href="pb.html"><span>PB · Paraíba</span><span class="n">1</span></a></li><li><a href="rn.html"><span>RN · Rio Grande do Norte</span><span class="n">1</span></a></li><li><a href="ro.html"><span>RO · Rondônia</span><span class="n">1</span></a></li><li><a href="se.html"><span>SE · Sergipe</span><span class="n">1</span></a></li>
     </ul>
-    <p class="caption">O número ao lado é a quantidade de eventos publicados na janela, não a quantidade de empresas: um mesmo processo pode gerar a decisão e o edital dela.</p>
+    <p class="caption">O número ao lado é a quantidade de eventos verificados na janela, não a quantidade de empresas: um mesmo processo pode gerar a decisão e o edital dela.</p>
   </div>
 </section>
 
@@ -233,10 +237,10 @@
   <div class="wrap">
     <h2>Estados que a nossa captura ainda não alcança</h2>
     <div class="note warn">
-      <p><b>Estes 3 estados saíram com ZERO eventos na nossa captura — e isso é lacuna nossa, não ausência de falência lá.</b> Empresas quebram nesses estados como em qualquer outro; o que falta é a nossa fonte alcançar a publicação. Por isso não existe página para eles: não vamos sugerir uma cobertura que não temos.</p>
+      <p><b>Estes 5 estados saíram com ZERO eventos verificados na nossa captura — e isso é lacuna nossa, não ausência de falência lá.</b> Empresas quebram nesses estados como em qualquer outro; o que falta é a nossa fonte alcançar a publicação, ou o que apareceu não passou na conferência. Por isso não existe página para eles: não vamos sugerir uma cobertura que não temos.</p>
     </div>
     <ul class="ufgrid vazias">
-      <li><span><span>AC · Acre</span><span>ainda não coberto por nós</span></span></li><li><span><span>AP · Amapá</span><span>ainda não coberto por nós</span></span></li><li><span><span>RR · Roraima</span><span>ainda não coberto por nós</span></span></li>
+      <li><span><span>AC · Acre</span><span>ainda não coberto por nós</span></span></li><li><span><span>AM · Amazonas</span><span>ainda não coberto por nós</span></span></li><li><span><span>AP · Amapá</span><span>ainda não coberto por nós</span></span></li><li><span><span>PA · Pará</span><span>ainda não coberto por nós</span></span></li><li><span><span>RR · Roraima</span><span>ainda não coberto por nós</span></span></li>
     </ul>
     <p class="caption">Se você vende a prazo dentro de um desses estados, diga isso na hora de pedir o teste: você vai ver exatamente o que encontramos e o que não encontramos da sua carteira, antes de pagar qualquer coisa.</p>
   </div>
@@ -246,20 +250,21 @@
   <div class="wrap">
     <h2>O que esta lista não é</h2>
     <div class="note warn">
-      <p><b>Não existe denominador — não sabemos o nosso recall.</b> Ninguém publica quantas recuperações judiciais e falências realmente aconteceram no Brasil neste período. Sabemos apenas quantas <b>a nossa busca encontrou</b>. Esta página é uma amostra do que capturamos, não um censo. Se um caso não está aqui, isso não prova que ele não existiu.</p>
+      <p><b>Não existe denominador — não sabemos o nosso recall.</b> Ninguém publica quantas recuperações judiciais e falências realmente aconteceram no Brasil neste período. Sabemos quantas <b>a nossa busca encontrou</b> (304 candidatos) e quantas <b>conseguimos verificar</b> (95). Não sabemos o tamanho do que ficou de fora. Esta página é uma amostra do que capturamos, não um censo: se um caso não está aqui, isso não prova que ele não existiu.</p>
       <ul>
+        <li><b>Publicamos só o que passa na verificação, e isso derruba caso real junto.</b> Foram <b>304 publicações candidatas</b> capturadas na janela; <b>95</b> (31,2%) sobreviveram a uma releitura contra o <b>texto integral</b> da publicação do tribunal. As descartadas eram, na maior parte, jurisprudência citada dentro de outra decisão, decisão já suspensa em segunda instância ou edital republicando ato antigo — mas o filtro também descarta o que ele simplesmente <em>não consegue confirmar</em>. Por isso <b>95 é piso, não teto</b>. A leitura errada seria "eram 304 e na verdade são 95"; a certa é "capturamos 304 candidatos e conseguimos verificar 95".</li>
+        <li><b>Mesmo depois da verificação nós ainda erramos, e o número está medido.</b> Numa reconferência cega do próprio conjunto já filtrado, feita à mão contra o texto do tribunal, <b>8 de 10 eventos inéditos conferiram (80%)</b>. Antes do filtro, a mesma medida dava 8 de 20 (40%). Melhorou muito e <b>ainda não está certo</b>: cerca de um alerta em cada cinco pode estar errado. É por isso que esta página traz volume, estado, tipo de ato e número de processo — <b>e não razão social</b>: número agregado sobrevive a um erro individual, nome próprio não.</li>
         <li><b>Janela fechada:</b> publicações disponibilizadas no Diário de Justiça Eletrônico Nacional entre <b>22/06/2026</b> e <b>07/08/2026</b>. Nada fora disso está contado.</li>
-        <li><b>A janela não é igual em todo estado.</b> Esta lista junta duas passadas de captura: a primeira varreu todos os tribunais até <b>05/08/2026</b>; a segunda, feita depois e só sobre os tribunais que tinham saído vazios (AM, GO, SC, SE, TO), foi até <b>07/08/2026</b>. Ou seja, nos demais estados os últimos dias da janela ainda não foram varridos — não conclua que nada aconteceu lá nesses dias.</li>
-        <li><b>3 estados continuam com zero eventos na nossa captura (AC, AP, RR). Isso é lacuna nossa, não ausência de falência lá.</b> Ou o tribunal usa outra redação, ou publica fora do DJEN, ou o volume não apareceu na nossa busca. Não criamos página para esses estados justamente para não sugerir cobertura que não temos.</li>
-        <li><b>A busca é por frases exatas, e nós já erramos por causa disso.</b> A primeira passada usava sete frases ("decreto a falência", "deferido o processamento da recuperação judicial" e outras cinco) e deu <b>zero evento em oito estados</b> — nós publicamos esse zero como lacuna nossa, e estávamos certos: ao reescrever a busca com as redações que aqueles tribunais realmente usam ("defiro o processamento", "declaro a falência", "julgo procedente o pedido de quebra", "concedo a recuperação judicial", recuperação extrajudicial), os eventos apareceram. Cinco daqueles estados entraram nesta lista. <b>O que essa correção prova é que o buraco de recall é real e nós não sabemos o tamanho dele</b> — inclusive nos estados que já apareciam.</li>
+        <li><b>A janela não é igual em todo estado.</b> Esta lista junta duas passadas de captura: a primeira varreu todos os tribunais até <b>05/08/2026</b>; a segunda, feita depois e só sobre os oito tribunais que tinham saído vazios, foi até <b>07/08/2026</b> — dela vieram os eventos verificados de GO, SC, SE, TO. Ou seja, <b>nos demais estados os últimos dias da janela ainda não foram varridos</b> — não conclua que nada aconteceu lá nesses dias.</li>
+        <li><b>5 estados continuam com zero eventos verificados na nossa captura (AC, AM, AP, PA, RR). Isso é lacuna nossa, não ausência de falência lá.</b> Ou o tribunal usa outra redação, ou publica fora do DJEN, ou o que apareceu não passou na verificação. Não criamos página para esses estados justamente para não sugerir cobertura que não temos.</li>
+        <li><b>A busca é por frases exatas, e nós já erramos por causa disso.</b> A primeira passada usava sete frases ("decreto a falência", "deferido o processamento da recuperação judicial" e outras cinco) e deu <b>zero evento em oito estados</b> — nós publicamos esse zero como lacuna nossa, e estávamos certos: ao reescrever a busca com as redações que aqueles tribunais realmente usam ("defiro o processamento", "declaro a falência", "julgo procedente o pedido de quebra", "concedo a recuperação judicial", recuperação extrajudicial), os eventos apareceram. <b>O que essa correção prova é que o buraco de recall é real e nós não sabemos o tamanho dele</b> — inclusive nos estados que já apareciam, que nunca foram recoletados com a busca nova.</li>
         <li><b>A data é a da publicação, não a do ato.</b> Editais dão publicidade a decisões bem anteriores.</li>
-        <li><b>Um mesmo processo pode aparecer duas vezes</b> (a decisão e o edital dela). Para contar empresas, use o número de devedores distintos, nunca o de eventos.</li>
+        <li><b>Um mesmo processo pode aparecer duas vezes</b> (a decisão e o edital dela). Para contar empresas, use o número de processos distintos, nunca o de eventos.</li>
         <li><b>"RJ concedida" não é entrada nova em recuperação judicial:</b> é a concessão (art. 58) de uma recuperação que já estava em curso. Está marcada em tipo separado justamente para não ser somada como empresa nova em RJ.</li>
-        <li><b>Nem todo devedor é pessoa jurídica.</b> 24 dos 263 devedores nomeados nesta base são pessoas físicas (empresário individual, produtor rural, sócio, espólio) — a lei permite que peçam recuperação. Eles ficam na lista com o nome como foi publicado, e não são contados como empresa.</li>
-        <li><b>A taxa de erro do nosso classificador não foi validada à mão</b> contra os autos. Onde a razão social não saiu com confiança, deixamos o campo vazio e escrito "razão social não extraída com confiança" — preferimos vazio a chutado.</li>
-        <li><b>Este índice cobre só o que está no nosso arquivo desta janela.</b> Não é série histórica: uma janela de 45 dias não permite afirmar tendência de aumento ou de queda, e não fazemos essa afirmação em lugar nenhum.</li>
+        <li><b>Só entram empresas com sufixo societário</b> (LTDA, S.A., EIRELI, ME, EPP, cooperativa). Empresário individual e produtor rural também podem pedir recuperação judicial, e a nossa regra de verificação os deixa de fora — é corte nosso, não ausência deles no mundo.</li>
+        <li><b>Este índice cobre só o que está no nosso arquivo desta janela.</b> Não é série histórica: uma janela de pouco mais de seis semanas não permite afirmar tendência de aumento ou de queda, e não fazemos essa afirmação em lugar nenhum. Comparação com número nosso antigo também não vale: quando o critério do que conta como evento muda, a diferença é de método, não do mundo.</li>
       </ul>
-      <p>Conferência: cada linha traz o número do processo, que abre no PJe / consulta pública do tribunal. Achou um erro nosso? Responda para <a href="mailto:g001-20@elucidata.vc">g001-20@elucidata.vc</a> que corrigimos e dizemos o que estava errado.</p>
+      <p>Conferência: cada linha traz o número do processo, que abre no PJe / consulta pública do tribunal — é assim que você confere se estamos certos, sem depender da nossa palavra. Achou um erro nosso? Responda para <a href="mailto:g001-20@elucidata.vc">g001-20@elucidata.vc</a> que corrigimos e dizemos o que estava errado.</p>
     </div>
   </div>
 </section>
