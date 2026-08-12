@@ -121,6 +121,10 @@
   #numeros{background:var(--bg-soft);border:1px dashed #b3c0cc;border-radius:12px;padding:18px 20px}
   #numeros h3{margin-top:0}
   #numeros p:last-child{margin-bottom:0}
+  #numeros table{width:100%;border-collapse:collapse;margin:0 0 1em;font-size:.95rem}
+  #numeros th,#numeros td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  #numeros th{font-weight:700;font-size:.88rem;color:var(--ink-soft)}
+  #numeros th:not(:first-child),#numeros td:not(:first-child){text-align:right;white-space:nowrap}
 
   /* ---------- formulário ---------- */
   #trial{background:var(--bg-soft)}
@@ -272,31 +276,31 @@ O QUE ISSO SIGNIFICA PARA VOCÊ
 <section>
   <div class="wrap">
     <h2>O que já monitoramos</h2>
-    <!-- Números medidos por nós, atualizados em 09/08/2026 a partir de 16.289 comunicações colhidas do
-         DJEN/CNJ em DUAS passadas de busca. Recalculáveis: dados/build_rjs.py + dados/build_uf_vazias.py
-         + dados/merge_corpus.py + dados/gen_numeros.py. Limitações em dados/NUMEROS.md § 7 — não prometer
-         cobertura nacional aqui, em hipótese nenhuma: recall é o risco nº 1 desta venture. -->
+    <!-- NUMEROS:INICIO -->
+    <!-- BLOCO GERADO POR COMANDO — não edite à mão.
+         Fonte: dados/rjs_alta_confianca.csv (VERIFICADO). Gerador: build_landing_numeros.py.
+         `dados/rjs_corpus.csv` entra aqui só como denominador e sempre rotulado "candidato":
+         até 11/08 este bloco publicava os candidatos como eventos, e a nossa validação
+         manual mediu ~40% de precisão neles. Limitações: dados/NUMEROS.md § 7.
+         Recalcular: python3 dados/filtro_confianca.py && python3 build_landing_numeros.py -->
     <div id="numeros">
-      <h3>Entre 22 de junho e 7 de agosto de 2026, capturamos 304 eventos de recuperação judicial e falência</h3>
-      <p>Eles envolvem <strong>263 devedores identificados pelo nome</strong> — 234 empresas e 24 pessoas físicas, porque empresário individual e produtor rural também pedem recuperação —, em <strong>24 estados</strong>, publicados no Diário de Justiça Eletrônico Nacional. Se um deles for seu cliente, você descobre pelo diário — ou pela inadimplência, 30 dias depois.</p>
+      <h3>Entre 22 de junho e 7 de agosto de 2026 capturamos 304 publicações candidatas de recuperação judicial e falência — e verificamos 95</h3>
+      <p>Candidato é o que o nosso robô marcou. <strong>Verificado</strong> é o que sobreviveu a uma releitura contra o <strong>texto integral da publicação do tribunal</strong>: o ato existe, é daquela empresa e está dentro da janela. Dos 304 candidatos, <strong>95 passaram</strong> (31%) — <strong>91 processos</strong> e <strong>91 empresas</strong>, em <strong>22 estados</strong>, publicados no Diário de Justiça Eletrônico Nacional. O resto era, na maior parte, jurisprudência citada dentro de outra decisão, decisão já suspensa em segunda instância ou edital republicando ato antigo.</p>
+      <p><strong>95 é o piso do que conseguimos provar, não o teto do que aconteceu.</strong> O filtro descarta tudo que ele não consegue confirmar — e nisso derruba caso real junto, sem que saibamos quantos. A leitura errada seria "eram 304 e na verdade são 95"; a certa é "capturamos 304 candidatos e conseguimos verificar 95". Se um cliente seu aparecer aqui, você descobre pelo diário — ou pela inadimplência, 30 dias depois.</p>
       <table>
-        <thead><tr><th>O que foi publicado</th><th>Eventos</th></tr></thead>
+        <thead><tr><th>O que foi publicado</th><th>Verificados</th><th>Candidatos capturados</th></tr></thead>
         <tbody>
-          <tr><td>Deferimento do processamento da recuperação judicial</td><td>128</td></tr>
-          <tr><td>Edital de recuperação judicial</td><td>66</td></tr>
-          <tr><td>Falência decretada</td><td>58</td></tr>
-          <tr><td>Edital de falência</td><td>34</td></tr>
-          <tr><td>Convolação de recuperação em falência</td><td>8</td></tr>
-          <tr><td>Pedido de recuperação judicial</td><td>5</td></tr>
-          <tr><td>Concessão da recuperação judicial (art. 58) — RJ já em curso</td><td>4</td></tr>
-          <tr><td>Edital de recuperação extrajudicial</td><td>1</td></tr>
+          <tr><td>Deferimento do processamento da recuperação judicial</td><td>33</td><td>128</td></tr><tr><td>Edital de recuperação judicial</td><td>28</td><td>66</td></tr><tr><td>Falência decretada</td><td>19</td><td>58</td></tr><tr><td>Edital de falência</td><td>7</td><td>34</td></tr><tr><td>Convolação de recuperação em falência</td><td>3</td><td>8</td></tr><tr><td>Concessão da recuperação judicial (art. 58) — RJ já em curso</td><td>4</td><td>4</td></tr><tr><td>Edital de recuperação extrajudicial</td><td>1</td><td>1</td></tr><tr><td><em>pedido de recuperação judicial</em></td><td>0</td><td>5</td></tr>
+          <tr><td><strong>total</strong></td><td><strong>95</strong></td><td><strong>304</strong></td></tr>
         </tbody>
       </table>
-      <p>Onde saíram: <strong>SC 51</strong> · <strong>GO 40</strong> · <strong>SP 39</strong> · <strong>PR 35</strong> · <strong>MT 29</strong> · MG 23 · RJ 21 · TO 14 · PE 7 · CE 6 — e mais 14 estados.</p>
-      <p class="alt-cta"><a href="uf/index.html">Veja os eventos por estado →</a> <span class="caption">Lista nominal aberta, com o número de cada processo — e a declaração dos 3 estados onde a nossa captura ainda não encontra nada.</span></p>
-      <p class="caption"><strong>O que mudou, e por que contamos isso.</strong> Até 8 de agosto esta página dizia 194 eventos em 19 estados, e declarava oito estados com zero — inclusive Santa Catarina. Aquele zero era defeito nosso: a busca procurava frases que os juízes daqueles tribunais não usam. Reescrevemos a busca e apareceram 110 eventos nominais em cinco deles (SC, GO, TO, SE, AM). <strong>A lição correta não é "agora cobrimos mais": é que o buraco de recall é real e nós não sabemos o tamanho dele</strong> — inclusive nos estados que já apareciam, que ainda não foram recontados com a busca nova.</p>
-      <p class="caption"><strong>O que estes números não são.</strong> Não são "todas as recuperações judiciais do Brasil": são as que <em>nós</em> capturamos nesta janela, com as buscas que usamos. Três estados ainda aparecem com zero eventos (AC, AP, RR), e isso quase certamente significa lacuna na nossa fonte, não ausência de falência lá. A janela também não é igual em todo estado: a primeira passada foi até 5 de agosto e a segunda, só sobre os tribunais que estavam vazios, até 7 de agosto. Um mesmo processo pode gerar a decisão e o edital dela — por isso 304 eventos correspondem a 285 processos e 263 devedores. Preferimos te contar isso agora a você descobrir depois: no teste, você vê exatamente o que encontramos da <em>sua</em> carteira e julga a cobertura com os seus próprios clientes na mão.</p>
+      <p>Onde saíram os 95 verificados: <strong>SC 17</strong> · <strong>PR 17</strong> · <strong>MG 10</strong> · <strong>RJ 9</strong> · <strong>GO 5</strong> · SP 5 · MT 5 · TO 4 · PE 3 · RS 3 — e mais 12 estados. Em Santa Catarina, por exemplo, foram <strong>17 eventos verificados</strong> de 51 candidatos capturados.</p>
+      <p class="alt-cta"><a href="uf/index.html">Veja os eventos verificados por estado →</a> <span class="caption">Lista aberta, com o número de cada processo para você conferir no próprio tribunal — e a declaração dos 5 estados onde a nossa captura ainda não verifica nada.</span></p>
+      <p class="caption"><strong>Nós ainda erramos, e o número está medido.</strong> Numa reconferência cega do próprio conjunto já filtrado, feita à mão contra o texto do tribunal, <strong>8 de 10 eventos inéditos conferiram (80%)</strong>. Antes do filtro, a mesma medida dava 8 de 20 (40%). Melhorou muito e ainda não está certo: cerca de <strong>um alerta em cada cinco pode estar errado</strong>. É por isso que publicamos volume, estado, tipo de ato e número de processo, <strong>e não a razão social</strong> — número agregado sobrevive a um erro individual, nome de empresa não. Quando essa taxa subir, e só então, os nomes entram.</p>
+      <p class="caption"><strong>O que mudou nesta página, e por que contamos isso.</strong> É histórico do nosso próprio defeito, e ele fica aqui de propósito. <em>(1)</em> Até 8 de agosto esta página dizia 194 eventos em 19 estados e declarava oito estados com zero — inclusive Santa Catarina. Aquele zero era defeito nosso: a busca procurava frases que os juízes daqueles tribunais não usam. Reescrevemos a busca e os eventos apareceram; 4 desses estados (GO, SC, SE, TO) têm evento verificado hoje. <em>(2)</em> Até 11 de agosto esta página publicava o total de <em>candidatos</em> como se fossem eventos. Conferimos 20 deles à mão contra o texto do tribunal e só 8 eram reais e na janela. Construímos o filtro, e é dele que sai o número que você está lendo. <strong>A lição correta não é "agora cobrimos mais" nem "agora está certo": é que o buraco de recall é real, nós não sabemos o tamanho dele</strong> — inclusive nos estados que já apareciam, que nunca foram recoletados com a busca nova.</p>
+      <p class="caption"><strong>O que estes números não são.</strong> Não são "todas as recuperações judiciais do Brasil": são as que <em>nós</em> capturamos nesta janela, com as buscas que usamos, e conseguimos verificar. Não existe denominador — ninguém publica quantas RJs e falências realmente aconteceram no país nesses dias, então não sabemos o nosso recall. 5 estados aparecem com zero eventos verificados (AC, AM, AP, PA, RR), e isso quase certamente significa lacuna na nossa fonte, não ausência de falência lá. <strong>A janela também não é igual em todo estado:</strong> a primeira passada varreu todos os tribunais até 05/08/2026 e a segunda, só sobre os oito tribunais que estavam vazios, foi até 07/08/2026 — nos demais estados os últimos dias ainda não foram varridos. Um mesmo processo pode gerar a decisão e o edital dela, por isso 95 eventos correspondem a 91 processos. Também só entram empresas com sufixo societário: empresário individual e produtor rural podem pedir recuperação e a nossa regra os deixa de fora. Preferimos te contar isso agora a você descobrir depois: no teste, você vê exatamente o que encontramos da <em>sua</em> carteira e julga a cobertura com os seus próprios clientes na mão.</p>
     </div>
+    <!-- NUMEROS:FIM -->
   </div>
 </section>
 
